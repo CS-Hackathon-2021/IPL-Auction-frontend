@@ -15,6 +15,19 @@ const MainDisplay = () => {
   const updateData=(current)=>{
       let newPlayerData=JSON.parse(JSON.stringify(playerData));
       newPlayerData[0].currentBid=current;
+      (async () => {
+        const rawResponse = await fetch('http://18.116.170.33:8080/player', {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newPlayerData[0])
+        });
+        const content = await rawResponse.json();
+      
+        console.log(content);
+      })();
       setplayerData(newPlayerData)
   }
   
@@ -29,22 +42,25 @@ const MainDisplay = () => {
           id="formGroupExampleInput"
           onChange={(e)=>{current=e.target.value}}
         />
-        <Button onClick={()=>{if(current<newPlayer.basePrice || current<newPlayer.currentBid)alert("Enter Value greater than current Bid or BasePrice")
-        else{updateData(current)}}}>Make a Bid</Button>
+        <Button onClick={()=>{if(current<(newPlayer.basePrice/100000) || current<(newPlayer.currentBid/100000))alert("Enter Value greater than current Bid or BasePrice")
+        else{updateData(current*100000)}}}>Make a Bid</Button>
       </div>
     );
   };
 
   // fetch data from fake api hosted on mocki.io
-  // useEffect(() => {
-  //     fetch('https://api.mocki.io/v1/55c0e90b')
-  //         .then(res => res.json())
-  //         .then(data => setplayerData(data))
-  //         .catch(err => console.log(err));
-  // }, []);
-  useEffect(() => {
-    setplayerData(playerDataDummy);
-  }, []);
+   useEffect(() => {
+       fetch('http://18.116.170.33:8080/biddingSession?id=1')
+           .then(res => res.json())
+           .then(data => {let dataList=[]
+            dataList.push(data.currentPlayer)
+            setplayerData(dataList)})
+          .catch(err => console.log(err));
+          
+   }, []);
+//   useEffect(() => {
+//     setplayerData(playerDataDummy);
+//   }, []);
 
   
   // useState to update the player list
