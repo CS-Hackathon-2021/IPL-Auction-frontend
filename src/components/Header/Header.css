@@ -1,0 +1,22 @@
+.header {
+    height: 200px;
+    background-image: url(../../images/background.png);
+    background-color: #082d4d;
+    color: #fff;
+    text-align: center;
+    padding: 2%;
+    position: relative;
+    background-size: cover;
+    display: flex;
+}
+
+.header>div {
+    font-weight: 300;
+    font-size: 50px;
+    margin: auto;
+}
+
+.header h4 {
+    font-size: 20px;
+    font-weight: 200;
+}

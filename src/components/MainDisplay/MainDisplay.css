@@ -1,0 +1,13 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.player-holder {
+    margin-left: 3%;
+}
+
+.team-summary {
+    margin-right: 3%;
+}
