@@ -3,6 +3,9 @@
     justify-content: space-between;
     margin-top: 30px;
 }
+.make-bid {
+    margin-left: 3%; 
+}
 
 .player-holder {
     margin-left: 3%;
